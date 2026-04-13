@@ -11,23 +11,38 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.logo-circle {
+.circles-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+
+.ring {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.ring1 { width: 200px; height: 200px; }
+.ring2 { width: 300px; height: 300px; }
+.ring3 { width: 400px; height: 400px; }
+
+.logo-box {
   width: 90px;
   height: 90px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.15);
   border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.logo-inner {
-  width: 40px;
-  height: 40px;
-  background: white;
-  border-radius: 50%;
+  position: relative;
+  z-index: 1;
 }
 
 .app-name {
@@ -36,6 +51,8 @@
   margin-top: 20px;
   font-family: Georgia, serif;
   letter-spacing: -1px;
+  position: relative;
+  z-index: 1;
 }
 
 .tagline {
@@ -43,4 +60,15 @@
   font-size: 16px;
   margin-top: 8px;
   letter-spacing: 0.3px;
+  position: relative;
+  z-index: 1;
+}
+
+.home-indicator {
+  position: absolute;
+  bottom: 20px;
+  width: 36px;
+  height: 4px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 2px;
 }
