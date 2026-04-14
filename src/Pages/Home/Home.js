@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import logo from './logo.svg';
+
+
 
 function Home() {
 
@@ -40,6 +43,7 @@ function Home() {
     <div className="home-page">
 
       <div className="home-header">
+        <img src={logo} alt="Milo Logo" width="60" height="60" />
         <h1 className="home-logo">Milo</h1>
         <p className="home-sub">Kho gaya? Mil jayega.</p>
       </div>
