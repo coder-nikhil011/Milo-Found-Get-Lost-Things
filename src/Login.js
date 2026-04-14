@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleLogin() {
-    alert('Login ho gaya! Email: ' + email);
+    if (!email || !password) {
+      alert('Please enter email and password!');
+      return;
+    }
+    alert('Login successful!');
   }
 
   return (
@@ -15,7 +22,7 @@ function Login() {
 
       <div className="login-header">
         <h1 className="login-logo">Milo</h1>
-        <p className="login-sub">Apne campus account se login karo</p>
+        <p className="login-sub">Kho gaya? Mil jayega.</p>
       </div>
 
       <div className="login-card">
@@ -24,7 +31,7 @@ function Login() {
           <label>Email</label>
           <input
             type="email"
-            placeholder="tumhari@email.com"
+            placeholder="your@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -41,11 +48,17 @@ function Login() {
         </div>
 
         <button className="login-btn" onClick={handleLogin}>
-          Login karo
+          Login
         </button>
 
         <p className="signup-text">
-          Naya account? <span className="signup-link">Register karo</span>
+          New here?{' '}
+          <span
+            className="signup-link"
+            onClick={() => navigate('/register')}
+          >
+            Create account
+          </span>
         </p>
 
       </div>
