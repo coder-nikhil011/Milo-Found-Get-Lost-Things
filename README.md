@@ -21,7 +21,7 @@ Milo/
 ├── public/
 │   └── images/                 # Static assets
 │       ├── favicon/icon        # Browser tab icon
-│       └── ...                 # Login & Register page icons
+│       └── image1.png                 # Login & Register page icons
 ├── src/
 │   ├── App.js                  # Root component with route definitions
 │   ├── App.css                 # Global splash screen styles
