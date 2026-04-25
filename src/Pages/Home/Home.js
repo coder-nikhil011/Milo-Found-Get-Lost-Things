@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../../Database/firebase';
@@ -21,15 +22,20 @@ function Home() {
         collection(db, 'posts'),
         orderBy('createdAt', 'desc')
       );
+
       const snapshot = await getDocs(q);
+
       const postsList = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
+
       setPosts(postsList);
+
     } catch (error) {
       alert('Error: ' + error.message);
     }
+
     setLoading(false);
   }
 
@@ -46,11 +52,13 @@ function Home() {
   return (
     <div className="home-page">
 
+      {/* Header */}
       <div className="home-header">
         <div>
           <h1 className="home-logo">Milo</h1>
           <p className="home-sub">Kho gaya? Mil jayega.</p>
         </div>
+
         <div className="header-btns">
           <button
             className="profile-btn"
@@ -58,12 +66,14 @@ function Home() {
           >
             My Profile
           </button>
+
           <button className="logout-btn" onClick={handleLogout}>
             Logout
           </button>
         </div>
       </div>
 
+      {/* Tabs */}
       <div className="home-tabs">
         <button
           className={`tab ${filter === 'all' ? 'active' : ''}`}
@@ -71,12 +81,14 @@ function Home() {
         >
           All
         </button>
+
         <button
           className={`tab ${filter === 'lost' ? 'active' : ''}`}
           onClick={() => setFilter('lost')}
         >
           Lost
         </button>
+
         <button
           className={`tab ${filter === 'found' ? 'active' : ''}`}
           onClick={() => setFilter('found')}
@@ -85,6 +97,7 @@ function Home() {
         </button>
       </div>
 
+      {/* Posts */}
       {loading ? (
         <div className="loading-text">Loading posts...</div>
       ) : filteredPosts.length === 0 ? (
@@ -92,24 +105,30 @@ function Home() {
       ) : (
         <div className="posts-list">
           {filteredPosts.map((post) => (
-            <div key={post.id} className="post-card">
+            <div
+              key={post.id}
+              className="post-card"
+              onClick={() => navigate(`/post/${post.id}`)}
+              style={{ cursor: 'pointer' }}
+            >
 
               <div className="post-top">
                 <span className={`post-badge ${post.type}`}>
                   {post.type === 'lost' ? 'Lost' : 'Found'}
                 </span>
+
                 <span className="post-date">
                   {post.createdAt?.toDate().toLocaleDateString()}
                 </span>
               </div>
 
-              {post.photoURL ? (
+              {post.photoURL && (
                 <img
                   src={post.photoURL}
                   alt={post.title}
                   className="post-image"
                 />
-              ) : null}
+              )}
 
               <h3 className="post-title">{post.title}</h3>
               <p className="post-desc">{post.description}</p>
@@ -121,15 +140,15 @@ function Home() {
 
             </div>
           ))}
+
+          <button
+            className="add-btn"
+            onClick={() => navigate('/create-post')}
+          >
+            + Post Item
+          </button>
         </div>
       )}
-
-      <button
-        className="add-btn"
-        onClick={() => navigate('/create-post')}
-      >
-        + Post Item
-      </button>
 
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../../database/firebase';
+import { db } from '../../Database/firebase';
 import { collection, getDocs, orderBy, query, limit } from 'firebase/firestore';
 import './Leaderboard.css';
 

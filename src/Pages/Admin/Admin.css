@@ -1,0 +1,294 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-page {
+  min-height: 100vh;
+  background: #F5F4FF;
+  padding: 20px;
+  padding-bottom: 80px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: white;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #444;
+}
+
+.admin-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  border: 0.5px solid #e0e0e0;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #6C63FF;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 13px;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: #6C63FF;
+  color: white;
+  border-color: #6C63FF;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  border: 0.5px solid #e0e0e0;
+}
+
+.admin-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.admin-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #6C63FF;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-info {
+  flex: 1;
+}
+
+.admin-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+}
+
+.admin-email {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.admin-campus {
+  font-size: 12px;
+  color: #6C63FF;
+  margin-top: 2px;
+}
+
+.admin-score-badge {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6C63FF;
+  background: #F5F4FF;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.role-select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+  color: #444;
+}
+
+.reset-btn {
+  padding: 8px 14px;
+  background: #FFE5E5;
+  color: #CC0000;
+  border: 1px solid #FF6B6B;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.reset-btn:hover {
+  background: #FF6B6B;
+  color: white;
+}
+
+.post-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.post-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.post-badge.lost {
+  background: #FFE5E5;
+  color: #CC0000;
+}
+
+.post-badge.found {
+  background: #E5FFE5;
+  color: #006600;
+}
+
+.verdict-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.verdict-badge.genuine {
+  background: #E5FFE5;
+  color: #006600;
+}
+
+.verdict-badge.fraud {
+  background: #FFE5E5;
+  color: #CC0000;
+}
+
+.verdict-badge.undefined {
+  background: #F5F4FF;
+  color: #6C63FF;
+}
+
+.post-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.post-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.delete-btn {
+  width: 100%;
+  padding: 10px;
+  background: #FFE5E5;
+  color: #CC0000;
+  border: 1px solid #FF6B6B;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.delete-btn:hover {
+  background: #FF6B6B;
+  color: white;
+}
+
+.fraud-card {
+  border-color: #FF6B6B;
+}
+
+.fraud-tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: #CC0000;
+  margin-bottom: 10px;
+}
+
+.loading-text {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.empty-text {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  font-size: 14px;
+}

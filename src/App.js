@@ -3,11 +3,15 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import Home from './Pages/Home/Home';
-import CreatePost from './createPost/CreatePost';
+import CreatePost from './CreatePost/CreatePost';
 import Profile from './Pages/Profile/Profile';
 import BottomNav from './components/BottomNav';
 import Leaderboard from './Pages/Leaderboard/Leaderboard';
 import Checker from './Pages/Checker/Checker';
+import PostDetail from './Pages/PostDetail/PostDetail';
+import Chat from './Pages/Chat/Chat';
+import Admin from './Pages/Admin/Admin';
+
 
 function Layout() {
   const location = useLocation();
@@ -23,6 +27,9 @@ function Layout() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/checker" element={<Checker />} />
+        <Route path="/post/:postId" element={<PostDetail />} />
+        <Route path="/chat/:friendId" element={<Chat />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       {!hideNav.includes(location.pathname) && <BottomNav />}
     </>

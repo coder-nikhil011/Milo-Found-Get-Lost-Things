@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.friends-page {
+  min-height: 100vh;
+  background: #F5F4FF;
+  padding: 20px;
+  padding-bottom: 80px;
+}
+
+.friends-header {
+  margin-bottom: 20px;
+}
+
+.friends-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+}
+
+.friends-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 13px;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: #6C63FF;
+  color: white;
+  border-color: #6C63FF;
+}
+
+.friends-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.friend-card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 0.5px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.friend-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #6C63FF;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.friend-info {
+  flex: 1;
+}
+
+.friend-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.friend-campus {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 2px;
+}
+
+.friend-score {
+  font-size: 12px;
+  color: #6C63FF;
+  font-weight: 500;
+}
+
+.chat-btn {
+  background: #6C63FF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.chat-btn:hover {
+  opacity: 0.9;
+}
+
+.request-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.accept-btn {
+  background: #E5FFE5;
+  color: #006600;
+  border: 1px solid #2ECC71;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.accept-btn:hover {
+  background: #2ECC71;
+  color: white;
+}
+
+.reject-btn {
+  background: #FFE5E5;
+  color: #CC0000;
+  border: 1px solid #FF6B6B;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.reject-btn:hover {
+  background: #FF6B6B;
+  color: white;
+}
+
+.loading-text {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.empty-text {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  font-size: 14px;
+}

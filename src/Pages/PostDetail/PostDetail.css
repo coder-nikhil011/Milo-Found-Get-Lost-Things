@@ -1,0 +1,182 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.detail-page {
+  min-height: 100vh;
+  background: #F5F4FF;
+  padding: 20px;
+  padding-bottom: 40px;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: white;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #444;
+}
+
+.detail-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.detail-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  border: 0.5px solid #e0e0e0;
+}
+
+.post-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.post-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.post-badge.lost {
+  background: #FFE5E5;
+  color: #CC0000;
+}
+
+.post-badge.found {
+  background: #E5FFE5;
+  color: #006600;
+}
+
+.status-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #F5F4FF;
+  color: #6C63FF;
+  text-transform: capitalize;
+}
+
+.detail-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.detail-item-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.detail-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.detail-info {
+  border-top: 0.5px solid #f0f0f0;
+  padding-top: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #888;
+}
+
+.info-value {
+  font-size: 13px;
+  color: #222;
+  font-weight: 500;
+}
+
+.info-value.approved {
+  color: #006600;
+}
+
+.info-value.pending {
+  color: #888;
+}
+
+.returned-btn {
+  width: 100%;
+  padding: 14px;
+  background: #6C63FF;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.returned-btn:hover {
+  opacity: 0.9;
+}
+
+.returned-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.returned-msg {
+  text-align: center;
+  padding: 14px;
+  background: #E5FFE5;
+  color: #006600;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.friend-req-btn {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  color: #6C63FF;
+  border: 1.5px solid #6C63FF;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s;
+}
+
+.friend-req-btn:hover {
+  background: #6C63FF;
+  color: white;
+}

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from '../../Database/firebase';
@@ -19,23 +20,34 @@ function Profile() {
     try {
       const currentUser = auth.currentUser;
 
+      if (!currentUser) {
+        navigate('/');
+        return;
+      }
+
+      // Fetch user data
       const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
       setUser(userDoc.data());
 
+      // Fetch user posts
       const q = query(
         collection(db, 'posts'),
         where('userId', '==', currentUser.uid)
       );
+
       const snapshot = await getDocs(q);
+
       const myPosts = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
+
       setPosts(myPosts);
 
     } catch (error) {
       alert('Error: ' + error.message);
     }
+
     setLoading(false);
   }
 
@@ -51,6 +63,7 @@ function Profile() {
   return (
     <div className="profile-page">
 
+      {/* Header */}
       <div className="profile-header">
         <button className="back-btn" onClick={() => navigate('/home')}>
           ← Back
@@ -61,6 +74,7 @@ function Profile() {
         </button>
       </div>
 
+      {/* Profile Card */}
       <div className="profile-card">
         <div className="avatar">
           {user?.name?.charAt(0).toUpperCase()}
@@ -70,7 +84,10 @@ function Profile() {
         <p className="profile-campus">Campus ID: {user?.campusId}</p>
       </div>
 
+      {/* Score + Dashboard Section */}
       <div className="score-card">
+
+        {/* Checker Dashboard */}
         {user?.role === 'checker' && (
           <button
             className="checker-btn"
@@ -79,24 +96,42 @@ function Profile() {
             Go to Checker Dashboard
           </button>
         )}
+
+        {/* Admin Dashboard */}
+        {user?.role === 'admin' && (
+          <button
+            className="checker-btn"
+            onClick={() => navigate('/admin')}
+          >
+            Go to Admin Dashboard
+          </button>
+        )}
+
+        {/* Score Info */}
         <div className="score-item">
           <h3 className="score-number">{user?.score || 0}</h3>
           <p className="score-label">Trust Score</p>
         </div>
+
         <div className="score-divider"></div>
+
         <div className="score-item">
           <h3 className="score-number">{posts.length}</h3>
           <p className="score-label">Total Posts</p>
         </div>
+
         <div className="score-divider"></div>
+
         <div className="score-item">
           <h3 className="score-number">
             {posts.filter(p => p.status === 'returned').length}
           </h3>
           <p className="score-label">Returned</p>
         </div>
+
       </div>
 
+      {/* Posts Section */}
       <h3 className="my-posts-title">My Posts</h3>
 
       {posts.length === 0 ? (
@@ -105,26 +140,34 @@ function Profile() {
         <div className="posts-list">
           {posts.map((post) => (
             <div key={post.id} className="post-card">
+
               <div className="post-top">
                 <span className={`post-badge ${post.type}`}>
                   {post.type === 'lost' ? 'Lost' : 'Found'}
                 </span>
+
                 <span className={`status-badge ${post.status}`}>
                   {post.status}
                 </span>
               </div>
-              {post.photoURL ? (
+
+              {post.photoURL && (
                 <img
                   src={post.photoURL}
                   alt={post.title}
                   className="post-image"
                 />
-              ) : null}
+              )}
+
               <h3 className="post-title">{post.title}</h3>
               <p className="post-desc">{post.description}</p>
+
               <div className="post-bottom">
-                <span className="post-location">📍 {post.location}</span>
+                <span className="post-location">
+                  📍 {post.location}
+                </span>
               </div>
+
             </div>
           ))}
         </div>
