@@ -71,6 +71,14 @@ function Profile() {
       </div>
 
       <div className="score-card">
+        {user?.role === 'checker' && (
+          <button
+            className="checker-btn"
+            onClick={() => navigate('/checker')}
+          >
+            Go to Checker Dashboard
+          </button>
+        )}
         <div className="score-item">
           <h3 className="score-number">{user?.score || 0}</h3>
           <p className="score-label">Trust Score</p>

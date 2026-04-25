@@ -218,3 +218,20 @@
   margin-top: 20px;
   font-size: 14px;
 }
+.checker-btn {
+  width: 100%;
+  padding: 14px;
+  background: #6C63FF;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: opacity 0.2s;
+}
+
+.checker-btn:hover {
+  opacity: 0.9;
+}
