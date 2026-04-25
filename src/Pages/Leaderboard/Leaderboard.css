@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.leaderboard-page {
+  min-height: 100vh;
+  background: #F5F4FF;
+  padding: 20px;
+  padding-bottom: 80px;
+}
+
+.leaderboard-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.leaderboard-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+}
+
+.leaderboard-sub {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.top-three {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.top-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 12px;
+  border-radius: 16px;
+  width: 100px;
+  border: 0.5px solid #e0e0e0;
+  background: white;
+}
+
+.rank-gold {
+  background: #FFF8E1;
+  border-color: #FFD93D;
+  transform: scale(1.05);
+}
+
+.rank-silver {
+  background: #F5F5F5;
+  border-color: #C0C0C0;
+}
+
+.rank-bronze {
+  background: #FFF3E0;
+  border-color: #CD7F32;
+}
+
+.top-rank {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.top-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #6C63FF;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.top-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.top-score {
+  font-size: 12px;
+  color: #6C63FF;
+  font-weight: 500;
+}
+
+.rest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rest-card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 0.5px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rest-rank {
+  font-size: 13px;
+  font-weight: 600;
+  color: #aaa;
+  width: 28px;
+}
+
+.rest-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #6C63FF;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rest-info {
+  flex: 1;
+}
+
+.rest-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+}
+
+.rest-campus {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.rest-score {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6C63FF;
+}
+
+.loading-text {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.empty-text {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+  font-size: 14px;
+}
