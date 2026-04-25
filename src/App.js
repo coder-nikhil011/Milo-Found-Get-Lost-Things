@@ -7,6 +7,7 @@ import CreatePost from './createPost/CreatePost';
 import Profile from './Pages/Profile/Profile';
 import BottomNav from './components/BottomNav';
 import Leaderboard from './Pages/Leaderboard/Leaderboard';
+import Checker from './Pages/Checker/Checker';
 
 function Layout() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function Layout() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/checker" element={<Checker />} />
       </Routes>
       {!hideNav.includes(location.pathname) && <BottomNav />}
     </>
