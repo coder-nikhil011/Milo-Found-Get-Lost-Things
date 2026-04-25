@@ -11,6 +11,7 @@ import Checker from './Pages/Checker/Checker';
 import PostDetail from './Pages/PostDetail/PostDetail';
 import Chat from './Pages/Chat/Chat';
 import Admin from './Pages/Admin/Admin';
+import Friends from './Pages/Friends/Friends';
 
 
 function Layout() {
@@ -30,6 +31,7 @@ function Layout() {
         <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/chat/:friendId" element={<Chat />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/friends" element={<Friends />} />
       </Routes>
       {!hideNav.includes(location.pathname) && <BottomNav />}
     </>
