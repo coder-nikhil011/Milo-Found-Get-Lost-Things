@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {auth,db} from '../../Database/firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import './Register.css';
 
 function Register() {
@@ -10,13 +13,37 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [campusId, setCampusId] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!name || !email || !password || !campusId) {
       alert('Please fill all fields!');
       return;
     }
-    alert('Account created! Welcome ' + name);
+
+    setLoading(true);
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, 'users', user.uid), {
+        name: name,
+        email: email,
+        campusId: campusId,
+        role: 'student',
+        score: 0,
+        createdAt: new Date()
+      });
+
+      alert('Account created! Welcome ' + name);
+      navigate('/home');
+
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -69,16 +96,17 @@ function Register() {
           />
         </div>
 
-        <button className="register-btn" onClick={handleRegister}>
-          Create Account
+        <button
+          className="register-btn"
+          onClick={handleRegister}
+          disabled={loading}
+        >
+          {loading ? 'Creating account...' : 'Create Account'}
         </button>
 
         <p className="login-text">
           Already have an account?{' '}
-          <span
-            className="login-link"
-            onClick={() => navigate('/')}
-          >
+          <span className="login-link" onClick={() => navigate('/')}>
             Login
           </span>
         </p>

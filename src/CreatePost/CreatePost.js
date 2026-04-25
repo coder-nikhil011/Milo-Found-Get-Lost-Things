@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db, storage, auth } from '../Database/firebase'
+import { collection, addDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './CreatePost.css';
+import firebase from 'firebase/compat/app';
 
 function CreatePost() {
 
@@ -12,6 +16,7 @@ function CreatePost() {
   const [location, setLocation] = useState('');
   const [photo, setPhoto] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   function handlePhoto(e) {
     const file = e.target.files[0];
@@ -21,13 +26,44 @@ function CreatePost() {
     }
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!title || !description || !location) {
       alert('Please fill all fields!');
       return;
     }
-    alert('Post created successfully!');
-    navigate('/home');
+
+    setLoading(true);
+
+    try {
+      let photoURL = '';
+
+      if (photo) {
+        const photoRef = ref(storage, 'posts/' + Date.now() + '_' + photo.name);
+        await uploadBytes(photoRef, photo);
+        photoURL = await getDownloadURL(photoRef);
+      }
+
+      await addDoc(collection(db, 'posts'), {
+        type: type,
+        title: title,
+        description: description,
+        location: location,
+        photoURL: photoURL,
+        userId: auth.currentUser.uid,
+        userName: auth.currentUser.displayName || 'Anonymous',
+        status: 'open',
+        checkerApproved: false,
+        createdAt: new Date()
+      });
+
+      alert('Post created successfully!');
+      navigate('/home');
+
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -105,8 +141,12 @@ function CreatePost() {
           />
         </div>
 
-        <button className="submit-btn" onClick={handleSubmit}>
-          Post Item
+        <button
+          className="submit-btn"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? 'Posting...' : 'Post Item'}
         </button>
 
       </div>

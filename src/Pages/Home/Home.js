@@ -1,77 +1,128 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db, auth } from '../../Database/firebase';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import './Home.css';
-import logo from '../../assests/logo.svg';
-
-
 
 function Home() {
 
   const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  const [filter, setFilter] = useState('all');
+  const [loading, setLoading] = useState(true);
 
-  const posts = [
-    {
-      id: 1,
-      type: 'lost',
-      title: 'Blue Backpack',
-      description: 'Lost near library, has books and a laptop inside.',
-      location: 'Main Library',
-      date: 'Dec 10, 2024',
-      name: 'Rahul S.'
-    },
-    {
-      id: 2,
-      type: 'found',
-      title: 'Black Wallet',
-      description: 'Found near canteen, has some cash and ID card.',
-      location: 'Canteen Area',
-      date: 'Dec 11, 2024',
-      name: 'Priya M.'
-    },
-    {
-      id: 3,
-      type: 'lost',
-      title: 'Student ID Card',
-      description: 'Lost somewhere in Block B classrooms.',
-      location: 'Block B',
-      date: 'Dec 12, 2024',
-      name: 'Amit K.'
-    },
-  ];
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  async function fetchPosts() {
+    try {
+      const q = query(
+        collection(db, 'posts'),
+        orderBy('createdAt', 'desc')
+      );
+      const snapshot = await getDocs(q);
+      const postsList = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setPosts(postsList);
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
+    setLoading(false);
+  }
+
+  const filteredPosts = posts.filter(post => {
+    if (filter === 'all') return true;
+    return post.type === filter;
+  });
+
+  function handleLogout() {
+    auth.signOut();
+    navigate('/');
+  }
 
   return (
     <div className="home-page">
 
       <div className="home-header">
-        <img src={logo} alt="Milo Logo" width="60" height="60" />
-        <h1 className="home-logo">Milo</h1>
-        <p className="home-sub">Kho gaya? Mil jayega.</p>
+        <div>
+          <h1 className="home-logo">Milo</h1>
+          <p className="home-sub">Kho gaya? Mil jayega.</p>
+        </div>
+        <div className="header-btns">
+          <button
+            className="profile-btn"
+            onClick={() => navigate('/profile')}
+          >
+            My Profile
+          </button>
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </div>
 
       <div className="home-tabs">
-        <button className="tab active">All</button>
-        <button className="tab">Lost</button>
-        <button className="tab">Found</button>
+        <button
+          className={`tab ${filter === 'all' ? 'active' : ''}`}
+          onClick={() => setFilter('all')}
+        >
+          All
+        </button>
+        <button
+          className={`tab ${filter === 'lost' ? 'active' : ''}`}
+          onClick={() => setFilter('lost')}
+        >
+          Lost
+        </button>
+        <button
+          className={`tab ${filter === 'found' ? 'active' : ''}`}
+          onClick={() => setFilter('found')}
+        >
+          Found
+        </button>
       </div>
 
-      <div className="posts-list">
-        {posts.map((post) => (
-          <div key={post.id} className="post-card">
-            <div className="post-top">
-              <span className={`post-badge ${post.type}`}>
-                {post.type === 'lost' ? 'Lost' : 'Found'}
-              </span>
-              <span className="post-date">{post.date}</span>
+      {loading ? (
+        <div className="loading-text">Loading posts...</div>
+      ) : filteredPosts.length === 0 ? (
+        <div className="empty-text">No posts yet. Be the first to post!</div>
+      ) : (
+        <div className="posts-list">
+          {filteredPosts.map((post) => (
+            <div key={post.id} className="post-card">
+
+              <div className="post-top">
+                <span className={`post-badge ${post.type}`}>
+                  {post.type === 'lost' ? 'Lost' : 'Found'}
+                </span>
+                <span className="post-date">
+                  {post.createdAt?.toDate().toLocaleDateString()}
+                </span>
+              </div>
+
+              {post.photoURL ? (
+                <img
+                  src={post.photoURL}
+                  alt={post.title}
+                  className="post-image"
+                />
+              ) : null}
+
+              <h3 className="post-title">{post.title}</h3>
+              <p className="post-desc">{post.description}</p>
+
+              <div className="post-bottom">
+                <span className="post-location">📍 {post.location}</span>
+                <span className="post-name">by {post.userName}</span>
+              </div>
+
             </div>
-            <h3 className="post-title">{post.title}</h3>
-            <p className="post-desc">{post.description}</p>
-            <div className="post-bottom">
-              <span className="post-location">📍 {post.location}</span>
-              <span className="post-name">by {post.name}</span>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       <button
         className="add-btn"
