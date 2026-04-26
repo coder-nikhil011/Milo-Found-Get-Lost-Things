@@ -4,13 +4,12 @@ import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBKXX6q9JGV0oXBAzaX5-fR9RVYrn7kX1c",
-  authDomain: "milo-c2d14.firebaseapp.com",
-  projectId: "milo-c2d14",
-  storageBucket: "milo-c2d14.appspot.com",
-  messagingSenderId: "580881876849",
-  appId: "1:580881876849:web:7a33ea18421989b210d8d0",
-  measurementId: "G-Y4EWZ42533"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
