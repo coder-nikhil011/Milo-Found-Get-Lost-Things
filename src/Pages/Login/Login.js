@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {auth,db}  from '../../Database/firebase'
+import { auth, db } from '../../Database/firebase';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import './Login.css';
@@ -34,20 +34,24 @@ function Login() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      const userDoc = await getDoc(doc(db, 'users', user.uid));
-
-      if (!userDoc.exists()) {
-        await setDoc(doc(db, 'users', user.uid), {
-          name: user.displayName,
-          email: user.email,
-          campusId: '',
-          role: 'student',
-          score: 0,
-          createdAt: new Date()
-        });
+      try {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (!userDoc.exists()) {
+          await setDoc(doc(db, 'users', user.uid), {
+            name: user.displayName || 'User',
+            email: user.email,
+            campusId: '',
+            role: 'student',
+            score: 0,
+            createdAt: new Date()
+          });
+        }
+      } catch (firestoreError) {
+        console.log('Firestore error ignored:', firestoreError);
       }
 
       navigate('/home');
+
     } catch (error) {
       alert('Error: ' + error.message);
     }

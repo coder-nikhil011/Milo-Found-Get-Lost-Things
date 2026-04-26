@@ -17,5 +17,8 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
+enableIndexedDbPersistence(db).catch((err) => {
+  console.log('Persistence error:', err.code);
+});
 
 export default app;
