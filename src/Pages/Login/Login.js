@@ -3,20 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../Database/firebase';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import Loader from '../../components/Loader';
 import './Login.css';
 
 function Login() {
-
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   async function handleLogin() {
-    if (!email || !password) {
-      alert('Please enter email and password!');
-      return;
-    }
+    if (!email || !password) { alert('Please enter email and password!'); return; }
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -33,7 +30,6 @@ function Login() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-
       try {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (!userDoc.exists()) {
@@ -46,12 +42,8 @@ function Login() {
             createdAt: new Date()
           });
         }
-      } catch (firestoreError) {
-        console.log('Firestore error ignored:', firestoreError);
-      }
-
+      } catch (e) { console.log('Firestore error:', e); }
       navigate('/home');
-
     } catch (error) {
       alert('Error: ' + error.message);
     }
@@ -60,51 +52,23 @@ function Login() {
 
   return (
     <div className="login-page">
-
+      {loading && <Loader />}
       <div className="login-header">
         <h1 className="login-logo">Milo</h1>
         <p className="login-sub">Kho gaya? Mil jayega.</p>
       </div>
-
       <div className="login-card">
-
         <div className="input-group">
           <label>Email</label>
-          <input
-            type="email"
-            placeholder="your@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-
         <div className="input-group">
           <label>Password</label>
-          <input
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <input type="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-
-        <button
-          className="login-btn"
-          onClick={handleLogin}
-          disabled={loading}
-        >
-          {loading ? 'Please wait...' : 'Login'}
-        </button>
-
-        <div className="divider">
-          <span>or</span>
-        </div>
-
-        <button
-          className="google-btn"
-          onClick={handleGoogleLogin}
-          disabled={loading}
-        >
+        <button className="login-btn" onClick={handleLogin} disabled={loading}>Login</button>
+        <div className="divider"><span>or</span></div>
+        <button className="google-btn" onClick={handleGoogleLogin} disabled={loading}>
           <svg width="18" height="18" viewBox="0 0 48 48">
             <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
             <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
@@ -113,16 +77,8 @@ function Login() {
           </svg>
           Continue with Google
         </button>
-
-        <p className="signup-text">
-          New here?{' '}
-          <span className="signup-link" onClick={() => navigate('/register')}>
-            Create account
-          </span>
-        </p>
-
+        <p className="signup-text">New here? <span className="signup-link" onClick={() => navigate('/register')}>Create account</span></p>
       </div>
-
     </div>
   );
 }
