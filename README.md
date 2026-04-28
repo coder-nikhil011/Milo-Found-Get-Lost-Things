@@ -86,6 +86,7 @@ The app will open at `http://localhost:3000`.
 | `npm test` | Launch the test runner |
 | `npm run build` | Build for production |
 
+
 ---
 
 ## 🔥 Firebase Setup
